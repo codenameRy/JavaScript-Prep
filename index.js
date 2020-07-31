@@ -51,9 +51,25 @@ function removeProperty(obj, prop) {
 
 // For example, it should convert user entered date "12/31/2014" to "20141231" suitable for the API.
 
+//Solution 1 - Rearrange characters in string with split by '/'
 function formatDate(userDate) {
-  const x = userDate.split('/');
-  return `${x[2]}${x[1]}${x[0]}`;
+  var parts = userDate.split('/');
+  if (parts[0].length == 1) parts[0] = '0' + parts[0];
+  if (parts[1].length == 1) parts[1] = '0' + parts[1];
+  return parts[2] + parts[0] + parts[1];
 }
 
-console.log(formatDate("12/31/2014"));
+console.log(formatDate("9/4/2014"));
+
+//Solution 2 - User of Date Object
+function formatDate2(userDate) {
+  userDate = new Date(userDate);
+  y = userDate.getFullYear().toString();
+  m = (userDate.getMonth() + 1).toString();
+  d = userDate.getDate().toString();
+  if (m.length == 1) m = '0' + m;
+  if (d.length == 1) d = '0' + d;
+  return y + m + d;
+}
+
+console.log(formatDate2("10/2/2020"));
