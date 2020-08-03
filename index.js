@@ -76,27 +76,47 @@ console.log(formatDate2("10/2/2020"));
 
 //Challenge - Image Gallery
 
-function setup() {
-  var items = document.getElementsByClassName("remove");
-  for (let i = 0; i < items.length; i++) {
-    items[i].addEventListener('click', function removeParentDiv() {
-      this.parentNode.remove();
-    });
-  }
-}
+// function setup() {
+//   var items = document.getElementsByClassName("remove");
+//   for (let i = 0; i < items.length; i++) {
+//     items[i].addEventListener('click', function removeParentDiv() {
+//       this.parentNode.remove();
+//     });
+//   }
+// }
 
 // Example case. 
-document.body.innerHTML = `
-<div class="image">
-  <img src="https://goo.gl/kjzfbE" alt="First">
-  <button class="remove">X</button>
-</div>
-<div class="image">
-  <img src="https://goo.gl/d2JncW" alt="Second">
-  <button class="remove">X</button>
-</div>`;
+// document.body.innerHTML = `
+// <div class="image">
+//   <img src="https://goo.gl/kjzfbE" alt="First">
+//   <button class="remove">X</button>
+// </div>
+// <div class="image">
+//   <img src="https://goo.gl/d2JncW" alt="Second">
+//   <button class="remove">X</button>
+// </div>`;
 
-setup();
+// setup();
 
-document.getElementsByClassName("remove")[0].click();
-console.log(document.body.innerHTML);
+// document.getElementsByClassName("remove")[0].click();
+// console.log(document.body.innerHTML);
+
+//Challenge 5 - Check Digits
+
+// Your company assigns each customer a membership ID, and you are implementing a check digit for those IDs.
+
+// The check digit should be calculated by adding up all digits in each membership ID. If the result of the sum is a number with more than a single digit, another iteration is required, and the digits of the result also should be added together. This process should repeat until a single-digit number is calculated.
+
+// For example, for the membership ID "55555" the sum of all digits is 25. Because this is not a single-digit number, 2 and 5 would be added, and the result, 7, would be the check digit.
+
+function createCheckDigit(membershipId) {
+  let sumMembershipId = aggregator(membershipId);
+  while (parseInt(sumMembershipId) > 9) sumMembershipId = aggregator(sumMembershipId);
+  return sumMembershipId;
+}
+
+function aggregator(strMembershipId) {
+  return strMembershipId.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+}
+
+console.log(createCheckDigit("55555"));
